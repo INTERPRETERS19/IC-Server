@@ -23,7 +23,6 @@ exports.createUser = async (req, res) => {
 exports.userSignIn = async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(email, password);
   const user = await User.findOne({ email });
 
   if (!user)
