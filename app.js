@@ -4,7 +4,7 @@ require("dotenv").config();
 require("./config/db");
 const useAddress = require("./routes/address");
 const userRouter = require("./routes/user");
-//const User = require("./models/user");
+const useShipment = require("./routes/shipment");
 
 const app = express();
 
@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 app.use(useAddress);
+app.use(useShipment);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
