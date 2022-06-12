@@ -71,6 +71,7 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+
   createdAt: {
     type: Date,
     required: true,
@@ -96,6 +97,10 @@ const ShipmentSchema = new mongoose.Schema({
   //   type: mongoose.Schema.Types.ObjectId,
   //   ref: "user",
   // },
+  driverID:{
+    type:mongoose.Types.ObjectId,
+    ref: "user"
+ 
 });
 console.log(`ID : ${Nanoid.nanoid(6)}`);
 module.exports = mongoose.model("shipment", ShipmentSchema);
