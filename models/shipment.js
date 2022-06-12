@@ -71,6 +71,10 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  driverID:{
+    type:mongoose.Types.ObjectId,
+    ref: "user"
+  
 });
 // console.log(`ID : ${Nanoid.nanoid(12)}`);
 module.exports = mongoose.model("shipment", ShipmentSchema);
