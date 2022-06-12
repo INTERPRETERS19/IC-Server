@@ -14,7 +14,6 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     default: () => Nanoid.nanoid(8),
   },
-  // @Id private ObjectId id;
 
   recipient_name: {
     type: String,
@@ -55,6 +54,7 @@ const ShipmentSchema = new mongoose.Schema({
   COD: {
     type: Number,
     required: true,
+    default: 0,
   },
 
   Prepaid: {
@@ -71,6 +71,31 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now,
+  },
+  currentStatus: {
+    type: String,
+    default: "New",
+  },
+  // receipientAddress: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "address",
+  // },
+  // shipperAddress: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "address",
+  // },
+  // serviceProvider: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "serviceprovider",
+  // },
+  // driverAssigned: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "user",
+  // },
 });
-// console.log(`ID : ${Nanoid.nanoid(12)}`);
+console.log(`ID : ${Nanoid.nanoid(6)}`);
 module.exports = mongoose.model("shipment", ShipmentSchema);

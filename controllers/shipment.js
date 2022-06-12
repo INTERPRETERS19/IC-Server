@@ -1,7 +1,4 @@
 const Shipment = require("../models/shipment");
-//const sharp = require("sharp");
-//const cloudinary = require("../helper/imageUpload");
-//const user = require("../models/user");
 
 exports.createShipment = async (req, res) => {
   const {
@@ -18,6 +15,12 @@ exports.createShipment = async (req, res) => {
     Prepaid,
     Handling,
     PaymentMethod,
+    createdAt,
+    currentStatus,
+    // receipientAddress,
+    // shipperAddress,
+    // serviceProvider,
+    // driverAssigned,
   } = req.body;
   //   const isNewUser = await User.isThisEmailInUse(email);
   //   if (!isNewUser)
@@ -39,7 +42,13 @@ exports.createShipment = async (req, res) => {
     Prepaid,
     Handling,
     PaymentMethod,
+    createdAt,
+    currentStatus,
+    // receipientAddress,
+    // shipperAddress,
+    // serviceProvider,
+    // driverAssigned,
   });
   await shipment.save();
-  res.json({ success: true, shipment });
+  res.json({ success: true, Shipment });
 };
