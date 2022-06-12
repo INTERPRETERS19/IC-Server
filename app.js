@@ -1,12 +1,13 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
-require("./models/db");
-const userRouter = require("./routes/user");
-
-const User = require("./models/user");
-
 const app = express();
+const connection = require("./models/db");
+
+//  ******* import required models and routes to the app.js file *********//
+const userRouter = require("./routes/user");
+const changepasswordRoute = require("./routes/changepassword");
+const User = require("./models/user");
 
 // app.use((req, res, next) => {
 //   req.on('data', chunk => {
@@ -19,6 +20,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(userRouter);
+app.use(changepasswordRoute);
 
 // const test = async (email, password) => {
 //   const user = await User.findOne({ email: email });
