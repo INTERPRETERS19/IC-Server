@@ -1,5 +1,5 @@
 {
-  "name": "fs_todo",
+  "name": "indexcloud",
   "version": "1.0.0",
   "description": "IndexCloud-Backend",
   "main": "app.js",
@@ -22,6 +22,11 @@
     "node-input-validator": "^4.5.0",
     "nodemon": "^2.0.7",
     "sharp": "^0.28.1",
-    "Validator": "^1.1.4"
+    "Validator": "^1.1.4",
+    "nanoid": "^3.3.4",
+    "session-rememberme": "^18.0.0"
+  },
+  "devDependencies": {
+    "coffeescript": "^2.7.0"
   }
 }

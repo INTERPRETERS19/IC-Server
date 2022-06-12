@@ -1,6 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+require("./config/db");
+const useAddress = require("./routes/address");
+const userRouter = require("./routes/user");
+const useShipment = require("./routes/shipment");
+
 const app = express();
 const connection = require("./models/db");
 
@@ -8,14 +14,6 @@ const connection = require("./models/db");
 const userRouter = require("./routes/user");
 const changepasswordRoute = require("./routes/changepassword");
 const User = require("./models/user");
-
-// app.use((req, res, next) => {
-//   req.on('data', chunk => {
-//     const data = JSON.parse(chunk);
-//     req.body = data;
-//     next();
-//   });
-// });
 
 app.use(cors());
 app.use(express.json());
@@ -29,6 +27,8 @@ app.use(changepasswordRoute);
 // };
 
 // test('niraj@email.com', 'niraj12');
+app.use(useAddress);
+app.use(useShipment);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
