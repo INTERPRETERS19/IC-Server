@@ -6,6 +6,9 @@ require("./config/db");
 const useAddress = require("./routes/address");
 const userRouter = require("./routes/user");
 const useShipment = require("./routes/shipment");
+const useShipper = require("./routes/shipper");
+const useServiceProvider = require("./routes/serviceprovider");
+const useBankDetails = require("./routes/bankdetails");
 
 const app = express();
 // const connection = require("./models/db");
@@ -26,6 +29,9 @@ app.use(changepasswordRoute);
 // test('niraj@email.com', 'niraj12');
 app.use(useAddress);
 app.use(useShipment);
+app.use(useShipper);
+app.use(useBankDetails);
+app.use(useServiceProvider);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
