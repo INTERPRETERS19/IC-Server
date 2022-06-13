@@ -1,11 +1,5 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-<<<<<<< HEAD
-=======
-//const sharp = require("sharp");
-//const cloudinary = require("../helper/imageUpload");
-//const user = require("../models/user");
->>>>>>> d4f3bd3ab877faf263868571c0836ad8597372e4
 
 exports.createUser = async (req, res) => {
   const {
@@ -62,17 +56,12 @@ exports.userSignIn = async (req, res) => {
   const userInfo = {
     fullname: user.fullname,
     email: user.email,
-<<<<<<< HEAD
     avatar: user.avatar ? user.avatar : "",
     id: user._id,
-=======
->>>>>>> d4f3bd3ab877faf263868571c0836ad8597372e4
   };
 
   res.json({ success: true, user: userInfo, token });
 };
-<<<<<<< HEAD
-=======
 
 exports.fetch_users = async (req, res) => {
   try {
@@ -86,4 +75,3 @@ exports.fetch_users = async (req, res) => {
     });
   }
 };
->>>>>>> d4f3bd3ab877faf263868571c0836ad8597372e4
