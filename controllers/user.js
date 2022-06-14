@@ -57,6 +57,7 @@ exports.userSignIn = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
+  const id = await user._id;
 
   if (!user)
     return res.json({
@@ -78,6 +79,8 @@ exports.userSignIn = async (req, res) => {
   const userInfo = {
     fullname: user.fullname,
     email: user.email,
+    avatar: user.avatar ? user.avatar : "",
+    id: user._id,
   };
 
   res.json({ success: true, user: userInfo, token });
