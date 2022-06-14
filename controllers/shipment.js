@@ -1,4 +1,8 @@
 const Shipment = require("../models/shipment");
+const Address = require("../models/address");
+const ServiceProvider = require("../models/serviceprovider");
+const User = require("../models/user");
+const Shipper = require("../models/shipper");
 
 exports.createShipment = async (req, res) => {
   const {
@@ -17,17 +21,17 @@ exports.createShipment = async (req, res) => {
     PaymentMethod,
     createdAt,
     currentStatus,
-    // receipientAddress,
-    // shipperAddress,
-    // serviceProvider,
-    // driverAssigned,
+    receipientAddress,
+    shipperAddress,
+    serviceProvider,
+    driverAssigned,
   } = req.body;
-  //   const isNewUser = await User.isThisEmailInUse(email);
-  //   if (!isNewUser)
-  //     return res.json({
-  //       success: false,
-  //       message: "This email is already in use, try sign-in",
-  //     });
+
+  const address = await Address.findById(receipientAddress);
+  const provider = await ServiceProvider.findById(serviceProvider);
+  const user = await User.findById(driverAssigned);
+  const s_address = await Shipper.findById(shipperAddress);
+
   const shipment = await Shipment({
     id,
     recipient_name,
@@ -44,11 +48,45 @@ exports.createShipment = async (req, res) => {
     PaymentMethod,
     createdAt,
     currentStatus,
-    // receipientAddress,
-    // shipperAddress,
-    // serviceProvider,
-    // driverAssigned,
+    receipientAddress: address,
+    shipperAddress: s_address,
+    serviceProvider: provider,
+    driverAssigned: user,
   });
   await shipment.save();
-  res.json({ success: true, Shipment });
+  res.json({ success: true, shipment });
+};
+
+exports.getStatus = async (req, res, next) => {
+  try {
+    const shipmentStatus = await Shipment.find(currentStatus);
+
+    return res.status(200).json({
+      success: true,
+      count: shipmentStatus.length,
+      data: shipmentStatus,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+exports.getUsers = async (req, res, next) => {
+  try {
+    const users = await User.find().populate("userAddress", "city");
+
+    return res.status(200).json({
+      success: true,
+      count: users.length,
+      data: users,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
 };

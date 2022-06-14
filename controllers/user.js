@@ -1,5 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const Address = require("../models/address");
+//const sharp = require("sharp");
 
 exports.createUser = async (req, res) => {
   const {
@@ -10,6 +12,7 @@ exports.createUser = async (req, res) => {
     mobile_number,
     vehicle_type,
     vehicle_reg_No,
+    userAddress,
   } = req.body;
   const isNewUser = await User.isThisEmailInUse(email);
   if (!isNewUser)
@@ -17,6 +20,8 @@ exports.createUser = async (req, res) => {
       success: false,
       message: "This email is already in use, try sign-in",
     });
+
+  const address = await Address.findById(userAddress);
   const user = await User({
     fullname,
     email,
@@ -25,9 +30,27 @@ exports.createUser = async (req, res) => {
     mobile_number,
     vehicle_type,
     vehicle_reg_No,
+    userAddress: address,
   });
   await user.save();
   res.json({ success: true, user });
+};
+
+exports.getUsers = async (req, res, next) => {
+  try {
+    const users = await User.find().populate("userAddress", "city");
+
+    return res.status(200).json({
+      success: true,
+      count: users.length,
+      data: users,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
 };
 
 exports.userSignIn = async (req, res) => {
@@ -75,4 +98,3 @@ exports.fetch_users = async (req, res) => {
     });
   }
 };
-

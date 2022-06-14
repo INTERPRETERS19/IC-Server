@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 require("./config/db");
 const useAddress = require("./routes/address");
 const userRouter = require("./routes/user");
@@ -9,14 +8,11 @@ const useShipment = require("./routes/shipment");
 const useShipper = require("./routes/shipper");
 const useServiceProvider = require("./routes/serviceprovider");
 const useBankDetails = require("./routes/bankdetails");
+const changepasswordRoute = require("./routes/changepassword");
 
 const app = express();
-const connection = require("./models/db");
 
 //  ******* import required models and routes to the app.js file *********//
-const userRouter = require("./routes/user");
-const changepasswordRoute = require("./routes/changepassword");
-const User = require("./models/user");
 
 app.use(cors());
 app.use(express.json());
