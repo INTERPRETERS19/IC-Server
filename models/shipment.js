@@ -1,20 +1,11 @@
 const mongoose = require("mongoose");
 const Nanoid = require("nanoid");
-// const NanoidAsync = require("nanoid/async");
-
-// console.log(`UUID with Nano ID sync: ${Nanoid.nanoid()}`);
-
-// (async function () {
-//   const nanoId = await NanoidAsync.nanoid();
-//   console.log(`UUID with Nano ID async: ${nanoId}`);
-// })();
 
 const ShipmentSchema = new mongoose.Schema({
   id: {
     type: String,
     default: () => Nanoid.nanoid(8),
   },
-
   recipient_name: {
     type: String,
     required: true,
@@ -81,26 +72,22 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     default: "New",
   },
-  // receipientAddress: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "address",
-  // },
-  // shipperAddress: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "address",
-  // },
-  // serviceProvider: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "serviceprovider",
-  // },
-  // driverAssigned: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "user",
-  // },
-  driverID: {
-    type: mongoose.Types.ObjectId,
+  receipientAddress: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "address",
+  },
+  shipperAddress: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "shipper",
+  },
+  serviceProvider: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "serviceprovider",
+  },
+  driverAssigned: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
 });
-console.log(`ID : ${Nanoid.nanoid(6)}`);
+// console.log(`ID : ${Nanoid.nanoid(6)}`);
 module.exports = mongoose.model("shipment", ShipmentSchema);

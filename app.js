@@ -9,24 +9,16 @@ const useShipment = require("./routes/shipment");
 const useShipper = require("./routes/shipper");
 const useServiceProvider = require("./routes/serviceprovider");
 const useBankDetails = require("./routes/bankdetails");
+const changepasswordRoute = require("./routes/changepassword");
 
 const app = express();
-// const connection = require("./models/db");
-const changepasswordRoute = require("./routes/changepassword");
-// const User = require("./models/user");
+
+//  ******* import required models and routes to the app.js file *********//
 
 app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 app.use(changepasswordRoute);
-
-// const test = async (email, password) => {
-//   const user = await User.findOne({ email: email });
-//   const result = await user.comparePassword(password);
-//   console.log(result);
-// };
-
-// test('niraj@email.com', 'niraj12');
 app.use(useAddress);
 app.use(useShipment);
 app.use(useShipper);
