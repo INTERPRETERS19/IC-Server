@@ -14,6 +14,7 @@ const {
 } = require('../middlewares/validation/user');
 
 const multer = require('multer');
+//const {shipmentInfo} = require('../controllers/shipmentInfo');
 
 const storage = multer.diskStorage({});
 
@@ -28,6 +29,7 @@ const uploads = multer({ storage, fileFilter });
 
 router.post('/create-user', validateUserSignUp, userVlidation, createUser);
 router.post('/sign-in', validateUserSignIn, userVlidation, userSignIn);
+//router.get('/shipmentInfo', shipmentInfo);
 router.post(
   '/upload-profile',
   isAuth,
