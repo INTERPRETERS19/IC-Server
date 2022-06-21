@@ -1,6 +1,6 @@
 const Shipment = require("../models/shipment.js");
 
-exports.shipmentInfo = async (req, res, next) => {
+exports.getShipmentInfo = async (req, res, next) => {
   // const email = Profile.email;
   // const value = req.body;
   // console.log(value);

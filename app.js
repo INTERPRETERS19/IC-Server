@@ -10,6 +10,7 @@ const useShipper = require("./routes/shipper");
 const useServiceProvider = require("./routes/serviceprovider");
 const useBankDetails = require("./routes/bankdetails");
 const changepasswordRoute = require("./routes/changepassword");
+const getShipmentInfo = require("./routes/shipmentInfo");
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(useShipment);
 app.use(useShipper);
 app.use(useBankDetails);
 app.use(useServiceProvider);
+app.use(getShipmentInfo);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
