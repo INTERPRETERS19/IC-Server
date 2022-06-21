@@ -14,7 +14,7 @@ const {
 } = require("../controllers/shipment");
 router.post("/createsh", createShipment);
 router.get("/shipments", getAllShipments);
-router.get("/collections", getCollections);
+router.get("/collections/:id", getCollections);
 router.get("/users", getUsers);
 router.get("/delivered", getDelivered);
 router.get("/outfordelivery", getOutForDelivery);

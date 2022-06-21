@@ -12,7 +12,6 @@ exports.createShipment = async (req, res) => {
     secondary_phone_number,
     shipment_weight,
     DV,
-    postal_code,
     description,
     quantity,
     COD,
@@ -21,15 +20,18 @@ exports.createShipment = async (req, res) => {
     payment_method,
     created_at,
     current_status,
-    receipient_address,
-    shipper_address,
+    r_postal_code,
+    r_no_street,
+    r_district,
+    r_city,
+    shipper_details,
     driver_assigned,
+    pickup_date,
   } = req.body;
 
-  const r_address = await Address.findById(receipient_address);
-  const user = await User.findById(driver_assigned, ["fullname", "email"]);
-  const shipper = await Shipper.findById(shipper_address);
-  const s_address = await Address.findById(shipper.shipper_address);
+  const user = await User.findById(driver_assigned);
+  const shipper = await Shipper.findById(shipper_details);
+   
 
   const shipment = await Shipment({
     id,
@@ -38,7 +40,6 @@ exports.createShipment = async (req, res) => {
     secondary_phone_number,
     shipment_weight,
     DV,
-    postal_code,
     description,
     quantity,
     COD,
@@ -47,9 +48,14 @@ exports.createShipment = async (req, res) => {
     payment_method,
     created_at,
     current_status,
-    receipient_address: r_address,
-    shipper_address: s_address,
+
+    r_postal_code,
+    r_no_street,
+    r_district,
+    r_city,
+    shipper_details: shipper,
     driver_assigned: user,
+    pickup_date,
   });
   await shipment.save();
   res.json({ success: true, shipment });
@@ -90,18 +96,28 @@ exports.getAllShipments = async (req, res, next) => {
 };
 
 exports.getCollections = async (req, res, next) => {
-  const id = req.body;
+
+  const { id } = req.params;
+
+  // const fullname = req.body.fullname;
   try {
-    const collections = await Shipment.find({
-      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+    const datas = await Shipment.find({
+      driver_assigned: id,
       current_status: "Delivered",
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
-    console.log(collections);
+
+    console.log(datas);
+    // const total = await Shipment.find;
+    // .select({ id: 1, COD: 1 });
+    // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
+    let total = 0;
+    datas.forEach((data) => (total += data.COD));
     return res.status(200).json({
       success: true,
-      count: collections.length,
-      data: collections,
+      count: datas.length,
+      data: datas,
+      total: total,
     });
   } catch (err) {
     return res.status(500).json({
