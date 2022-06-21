@@ -10,7 +10,7 @@ const useShipper = require("./routes/shipper");
 const useServiceProvider = require("./routes/serviceprovider");
 const useBankDetails = require("./routes/bankdetails");
 const changepasswordRoute = require("./routes/changepassword");
-
+const shipmentDetailRoute = require("./routes/shipmentdetails");
 const app = express();
 
 //  ******* import required models and routes to the app.js file *********//
@@ -24,6 +24,7 @@ app.use(useShipment);
 app.use(useShipper);
 app.use(useBankDetails);
 app.use(useServiceProvider);
+app.use(shipmentDetailRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello world");

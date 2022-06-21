@@ -1,16 +1,16 @@
-const ShipmentDetails = require("../models/shipment");
+const Shipment = require("../models/shipment.js");
 
-exports.sd = async (req, res, next) => {
+exports.shipmentDetails = async (req, res, next) => {
+  // const email = Profile.email;
+  const value = req.body;
+   console.log(value);
   try {
-    const sd = await ShipmentDetails.findOne(req.body).populate(
-      "shipper_address",
-      "city"
-    );
-
-    if (!sd) {
-      return res.status(400).json({ msg: "There is no shipmentdetails" });
+    const shipmentDetails = await Shipment.findOne(req.id);
+  
+    if (!shipmentDetails) {
+      return res.status(400).json({ msg: "There is no details for shipment" });
     }
-    res.json(sd);
+    res.json(shipmentDetails);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
