@@ -6,14 +6,20 @@ const {
   getAllShipments,
   getCollections,
   getUsers,
-  getAllReturns,
-  getAllNewShipments,
+  getDelivered,
+  getOutForDelivery,
+  getRescheduled,
+  getSummary,
+  getFailToDelivery ,
 } = require("../controllers/shipment");
 router.post("/createsh", createShipment);
 router.get("/shipments", getAllShipments);
 router.get("/collections/:id", getCollections);
 router.get("/users", getUsers);
-router.get("/returns", getAllReturns);
-router.get("/newships", getAllNewShipments);
+router.get("/delivered", getDelivered);
+router.get("/outfordelivery", getOutForDelivery);
+router.get("/rescheduled", getRescheduled);
+router.get("/summary", getSummary);
+router.get("/failtodelivery", getFailToDelivery);
 
 module.exports = router;

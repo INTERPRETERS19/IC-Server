@@ -24,7 +24,7 @@ const ShipperSchema = new mongoose.Schema({
     maxLength: [10, "Max Length is 10 characters"],
     minLength: [10, "Min Length is 10 characters"],
   },
-  shipperAddress: {
+  shipper_address: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "address",
   },

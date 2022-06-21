@@ -31,6 +31,7 @@ exports.createShipment = async (req, res) => {
 
   const user = await User.findById(driver_assigned);
   const shipper = await Shipper.findById(shipper_details);
+   
 
   const shipment = await Shipment({
     id,
@@ -47,6 +48,7 @@ exports.createShipment = async (req, res) => {
     payment_method,
     created_at,
     current_status,
+
     r_postal_code,
     r_no_street,
     r_district,
@@ -94,6 +96,7 @@ exports.getAllShipments = async (req, res, next) => {
 };
 
 exports.getCollections = async (req, res, next) => {
+
   const { id } = req.params;
 
   // const fullname = req.body.fullname;
@@ -115,6 +118,110 @@ exports.getCollections = async (req, res, next) => {
       count: datas.length,
       data: datas,
       total: total,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+exports.getDelivered = async (req, res, next) => {
+  const id = req.body;
+  try {
+    const delivered = await Shipment.find({
+      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+      current_status: "Delivered",
+    }).select({ id: 1 });
+    console.log(delivered);
+    return res.status(200).json({
+      success: true,
+      count: delivered.length,
+      data: delivered,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+exports.getOutForDelivery = async (req, res, next) => {
+  const id = req.body;
+  try {
+    const outfordelivery = await Shipment.find({
+      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+      current_status: "OutForDelivery",
+    }).select({ id: 1 });
+    console.log(outfordelivery);
+    return res.status(200).json({
+      success: true,
+      count: outfordelivery.length,
+      data: outfordelivery,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+exports.getRescheduled = async (req, res, next) => {
+  const id = req.body;
+  try {
+    const rescheduled = await Shipment.find({
+      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+      current_status: "Rescheduled",
+    }).select({ id: 1 });
+    console.log(rescheduled);
+    return res.status(200).json({
+      success: true,
+      count: rescheduled.length,
+      data: rescheduled,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+exports.getSummary = async (req, res, next) => {
+  const id = req.body;
+  try {
+    const summary = await Shipment.find({
+      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+    }).select({ id: 1 });
+    console.log(summary);
+    return res.status(200).json({
+      success: true,
+      count: summary.length,
+      data: summary,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+exports.getFailToDelivery = async (req, res, next) => {
+  const id = req.body;
+  try {
+    const failtodelivery = await Shipment.find({
+      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+      current_status: "FailToDeliver",
+    }).select({ id: 1 });
+    console.log(failtodelivery);
+    return res.status(200).json({
+      success: true,
+      count: failtodelivery.length,
+      data: failtodelivery,
     });
   } catch (err) {
     return res.status(500).json({
