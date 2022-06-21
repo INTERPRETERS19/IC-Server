@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 require("./config/db");
-const useAddress = require("./routes/address");
+
 const userRouter = require("./routes/user");
 const useShipment = require("./routes/shipment");
 const useShipper = require("./routes/shipper");
@@ -17,10 +17,12 @@ app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 app.use(changepasswordRoute);
-app.use(useAddress);
+//app.use(useAddress);
 app.use(useShipment);
 app.use(useShipper);
 app.use(useBankDetails);
+//app.use(useServiceProvider);
+//app.use(shipmentDetailRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello world");

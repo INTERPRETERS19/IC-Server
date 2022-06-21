@@ -8,6 +8,7 @@ const {
   getUsers,
 } = require("../controllers/user");
 
+//const { sd } = require("../controllers/shipmetDetails");
 const {
   validateUserSignUp,
   userVlidation,
@@ -18,4 +19,5 @@ router.post("/create-user", validateUserSignUp, userVlidation, createUser);
 router.post("/sign-in", validateUserSignIn, userVlidation, userSignIn);
 router.get("/user", fetch_users);
 router.get("/allusers", getUsers);
+//router.get("/shipmentdetails", sd);
 module.exports = router;

@@ -10,6 +10,22 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  r_postal_code: {
+    type: Number,
+  },
+
+  r_no_street: {
+    type: String,
+    required: true,
+  },
+  r_city: {
+    type: String,
+    required: true,
+  },
+  r_district: {
+    type: String,
+    required: true,
+  },
 
   shipment_weight: {
     type: Number,
@@ -27,11 +43,6 @@ const ShipmentSchema = new mongoose.Schema({
   DV: {
     type: Number,
   },
-
-  postal_code: {
-    type: Number,
-  },
-
   description: {
     type: String,
     required: true,
@@ -72,14 +83,18 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     default: "New",
   },
-  receipient_address: {
-    type: Object,
+  shipper_details: {
+    type: mongoose.Types.ObjectId,
+    ref: "shipper",
   },
-  shipper_address: {
-    type: Object,
-  },
+
   driver_assigned: {
-    type: Object,
+    type: mongoose.Types.ObjectId,
+    ref: "user",
+  },
+  pickup_date: {
+    type: Date,
+    default: null,
   },
 });
 
