@@ -67,8 +67,7 @@ userSchema.statics.isThisEmailInUse = async function (email) {
     const user = await this.findOne({ email });
     if (user) return false;
     return true;
-  }
-  catch (error) {
+  } catch (error) {
     console.log("error inside isThisEmailInUse method", error.message);
     return false;
   }
