@@ -11,16 +11,16 @@ const ShipmentSchema = new mongoose.Schema({
     required: true,
   },
 
-  ShipmentWeight: {
+  shipment_weight: {
     type: Number,
     required: true,
   },
 
-  MobilePhoneNumber: {
+  mobile_phone_number: {
     type: String,
     required: true,
   },
-  SecondaryPhoneNumber: {
+  secondary_phone_number: {
     type: String,
   },
 
@@ -28,16 +28,16 @@ const ShipmentSchema = new mongoose.Schema({
     type: Number,
   },
 
-  PostalCode: {
-    type: String,
+  postal_code: {
+    type: Number,
   },
 
-  Description: {
+  description: {
     type: String,
     required: true,
   },
 
-  Quantity: {
+  quantity: {
     type: Number,
     required: true,
   },
@@ -48,46 +48,39 @@ const ShipmentSchema = new mongoose.Schema({
     default: 0,
   },
 
-  Prepaid: {
+  prepaid: {
     type: Boolean,
     required: true,
   },
 
-  Handling: {
+  handling: {
     type: String,
     required: true,
   },
 
-  PaymentMethod: {
+  payment_method: {
     type: String,
     required: true,
   },
 
-  createdAt: {
+  created_at: {
     type: Date,
     required: true,
     default: Date.now,
   },
-  currentStatus: {
+  current_status: {
     type: String,
     default: "New",
   },
-  receipientAddress: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "address",
+  receipient_address: {
+    type: Object,
   },
-  shipperAddress: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "shipper",
+  shipper_address: {
+    type: Object,
   },
-  serviceProvider: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "serviceprovider",
-  },
-  driverAssigned: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "user",
+  driver_assigned: {
+    type: Object,
   },
 });
-// console.log(`ID : ${Nanoid.nanoid(6)}`);
+
 module.exports = mongoose.model("shipment", ShipmentSchema);

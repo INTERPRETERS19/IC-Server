@@ -57,19 +57,19 @@ exports.userSignIn = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
-  const id = await user._id;
+  //const id = await user._id;
 
   if (!user)
     return res.json({
       success: false,
-      message: "user not found, with the given email!",
+      message: "User not found, with the given E-mail!",
     });
 
   const isMatch = await user.comparePassword(password);
   if (!isMatch)
     return res.json({
       success: false,
-      message: "email / password does not match!",
+      message: "E-mail / password does not match!",
     });
 
   const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {

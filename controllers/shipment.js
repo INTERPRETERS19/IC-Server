@@ -1,6 +1,5 @@
 const Shipment = require("../models/shipment");
 const Address = require("../models/address");
-const ServiceProvider = require("../models/serviceprovider");
 const User = require("../models/user");
 const Shipper = require("../models/shipper");
 
@@ -8,71 +7,69 @@ exports.createShipment = async (req, res) => {
   const {
     id,
     recipient_name,
-    MobilePhoneNumber,
-    SecondaryPhoneNumber,
-    ShipmentWeight,
+    mobile_phone_number,
+    secondary_phone_number,
+    shipment_weight,
     DV,
-    PostalCode,
-    Description,
-    Quantity,
+    postal_code,
+    description,
+    quantity,
     COD,
-    Prepaid,
-    Handling,
-    PaymentMethod,
-    createdAt,
-    currentStatus,
-    receipientAddress,
-    shipperAddress,
-    serviceProvider,
-    driverAssigned,
+    prepaid,
+    handling,
+    payment_method,
+    created_at,
+    current_status,
+    receipient_address,
+    shipper_address,
+    driver_assigned,
   } = req.body;
 
-  const address = await Address.findById(receipientAddress);
-  const provider = await ServiceProvider.findById(serviceProvider);
-  const user = await User.findById(driverAssigned);
-  const s_address = await Shipper.findById(shipperAddress);
+  const r_address = await Address.findById(receipient_address);
+  const user = await User.findById(driver_assigned, ["fullname", "email"]);
+  const shipper = await Shipper.findById(shipper_address);
+  const s_address = await Address.findById(shipper.shipper_address);
 
   const shipment = await Shipment({
     id,
     recipient_name,
-    MobilePhoneNumber,
-    SecondaryPhoneNumber,
-    ShipmentWeight,
+    mobile_phone_number,
+    secondary_phone_number,
+    shipment_weight,
     DV,
-    PostalCode,
-    Description,
-    Quantity,
+    postal_code,
+    description,
+    quantity,
     COD,
-    Prepaid,
-    Handling,
-    PaymentMethod,
-    createdAt,
-    currentStatus,
-    receipientAddress: address,
-    shipperAddress: s_address,
-    serviceProvider: provider,
-    driverAssigned: user,
+    prepaid,
+    handling,
+    payment_method,
+    created_at,
+    current_status,
+    receipient_address: r_address,
+    shipper_address: s_address,
+    driver_assigned: user,
   });
   await shipment.save();
   res.json({ success: true, shipment });
 };
 
-exports.getStatus = async (req, res, next) => {
-  try {
-    const shipmentStatus = await Shipment.find(currentStatus);
+// exports.getStatus = async (req, res, next) => {
+//   try {
+//     const shipmentStatus = await Shipment.find(current_status);
 
-    return res.status(200).json({
-      success: true,
-      count: shipmentStatus.length,
-      data: shipmentStatus,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      error: "Server Error",
-    });
-  }
-};
+//     return res.status(200).json({
+//       success: true,
+//       count: shipmentStatus.length,
+//       data: shipmentStatus,
+//     });
+//   } catch (err) {
+//     return res.status(500).json({
+//       success: false,
+//       error: "Server Error",
+//     });
+//   }
+// };
 
 exports.getUsers = async (req, res, next) => {
   try {
@@ -82,6 +79,23 @@ exports.getUsers = async (req, res, next) => {
       success: true,
       count: users.length,
       data: users,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+exports.getAllShipments = async (req, res, next) => {
+  try {
+    const shipments = await Shipment.find();
+
+    return res.status(200).json({
+      success: true,
+      count: shipments.length,
+      data: shipments,
     });
   } catch (err) {
     return res.status(500).json({
