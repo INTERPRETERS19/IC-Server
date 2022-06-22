@@ -1,18 +1,21 @@
 const mongoose = require("mongoose");
 
 const ShipperSchema = new mongoose.Schema({
-  username: {
+  firstName: {
     type: String,
+    trim: true,
     required: true,
   },
-  businessname: {
+  lastName: {
     type: String,
+    trim: true,
     required: true,
   },
   email: {
     type: String,
-    required: true,
+    trim: true,
     unique: true,
+    required: true,
   },
   password: {
     type: String,
@@ -28,10 +31,5 @@ const ShipperSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "address",
   },
-  //photo
 });
 module.exports = mongoose.model("shipper", ShipperSchema);
-// "street_no":"23",
-// "city":"moratuwa",
-// "district":"colombo",
-// "province":"uva"

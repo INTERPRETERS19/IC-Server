@@ -1,5 +1,5 @@
 const Shipment = require("../models/shipment");
-const Address = require("../models/address");
+//const Address = require("../models/address");
 const User = require("../models/user");
 const Shipper = require("../models/shipper");
 const mongoose = require("mongoose");
@@ -31,7 +31,6 @@ exports.createShipment = async (req, res) => {
 
   const user = await User.findById(driver_assigned);
   const shipper = await Shipper.findById(shipper_details);
-   
 
   const shipment = await Shipment({
     id,
@@ -95,7 +94,7 @@ exports.getAllShipments = async (req, res, next) => {
   }
 };
 
-exports.getCollections = async (req, res, next) => 
+exports.getCollections = async (req, res, next) => {
   const { id } = req.params;
 
   // const fullname = req.body.fullname;
@@ -160,7 +159,7 @@ exports.getOutForDelivery = async (req, res, next) => {
     const dataO = await Shipment.find({
       driver_assigned: id,
       current_status: "OutForDelivery",
-    }).select({ id: 1 ,r_no_street:1 ,r_city:1});
+    }).select({ id: 1, r_no_street: 1, r_city: 1 });
 
     console.log(dataO);
     return res.status(200).json({
@@ -184,7 +183,7 @@ exports.getRescheduled = async (req, res, next) => {
     const dataR = await Shipment.find({
       driver_assigned: id,
       current_status: "Rescheduled",
-    }).select({ id: 1});
+    }).select({ id: 1 });
 
     console.log(dataR);
     // const total = await Shipment.find;
@@ -211,10 +210,10 @@ exports.getSummary = async (req, res, next) => {
     const dataM = await Shipment.find({
       driver_assigned: id,
       // current_status: "Delivered",
-    }).select({ id: 1, current_status:1});
+    }).select({ id: 1, current_status: 1 });
 
     console.log(dataM);
-  
+
     return res.status(200).json({
       success: true,
       count: dataM.length,
