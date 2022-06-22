@@ -105,7 +105,7 @@ exports.getCollections = async (req, res, next) => {
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
 
-    console.log(datas);
+    // console.log(datas);
     // const total = await Shipment.find;
     // .select({ id: 1, COD: 1 });
     // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
