@@ -3,11 +3,10 @@ const express = require("express");
 const cors = require("cors");
 require("./config/db");
 
-const useAddress = require("./routes/address");
 const userRouter = require("./routes/user");
 const useShipment = require("./routes/shipment");
 const useShipper = require("./routes/shipper");
-const useServiceProvider = require("./routes/serviceprovider");
+// const useServiceProvider = require("./routes/serviceprovider");
 const useBankDetails = require("./routes/bankdetails");
 const changepasswordRoute = require("./routes/changepassword");
 const getShipmentInfo = require("./routes/shipmentInfo");

@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const Address = require("../models/address");
 //const sharp = require("sharp");
 
 exports.createUser = async (req, res) => {
