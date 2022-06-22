@@ -159,7 +159,7 @@ exports.getOutForDelivery = async (req, res, next) => {
     const dataO = await Shipment.find({
       driver_assigned: id,
       current_status: "OutForDelivery",
-    }).select({ id: 1, r_no_street: 1, r_city: 1 });
+    });
 
     console.log(dataO);
     return res.status(200).json({
