@@ -37,10 +37,6 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "address",
   },
-  // avatar: {
-  //   type: Buffer,
-  //   contentType: String,
-  // },
 });
 
 userSchema.pre("save", function (next) {
@@ -70,7 +66,6 @@ userSchema.statics.isThisEmailInUse = async function (email) {
   try {
     const user = await this.findOne({ email });
     if (user) return false;
-
     return true;
   } catch (error) {
     console.log("error inside isThisEmailInUse method", error.message);

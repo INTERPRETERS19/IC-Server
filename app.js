@@ -10,7 +10,7 @@ const useShipper = require("./routes/shipper");
 const useBankDetails = require("./routes/bankdetails");
 const changepasswordRoute = require("./routes/changepassword");
 const getShipmentInfo = require("./routes/shipmentInfo");
-
+const shipmentDetailRoute = require("./routes/shipmentdetails");
 const app = express();
 
 //  ******* import required models and routes to the app.js file *********//
@@ -19,12 +19,11 @@ app.use(cors());
 app.use(express.json());
 app.use(userRouter);
 app.use(changepasswordRoute);
-app.use(useAddress);
 app.use(useShipment);
 app.use(useShipper);
 app.use(useBankDetails);
-app.use(useServiceProvider);
 app.use(getShipmentInfo);
+app.use(shipmentDetailRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello world");

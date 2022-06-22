@@ -10,7 +10,6 @@ const ShipmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-
   r_postal_code: {
     type: Number,
   },
@@ -98,5 +97,6 @@ const ShipmentSchema = new mongoose.Schema({
     default: null,
   },
 });
+
 
 module.exports = mongoose.model("shipment", ShipmentSchema);
