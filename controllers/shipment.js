@@ -12,7 +12,6 @@ exports.createShipment = async (req, res) => {
     secondary_phone_number,
     shipment_weight,
     DV,
-    postal_code,
     description,
     quantity,
     COD,
@@ -21,15 +20,18 @@ exports.createShipment = async (req, res) => {
     payment_method,
     created_at,
     current_status,
-    receipient_address,
-    shipper_address,
+    r_postal_code,
+    r_no_street,
+    r_district,
+    r_city,
+    shipper_details,
     driver_assigned,
+    pickup_date,
   } = req.body;
 
-  const r_address = await Address.findById(receipient_address);
-  const user = await User.findById(driver_assigned, ["fullname", "email"]);
-  const shipper = await Shipper.findById(shipper_address);
-  const s_address = await Address.findById(shipper.shipper_address);
+  const user = await User.findById(driver_assigned);
+  const shipper = await Shipper.findById(shipper_details);
+   
 
   const shipment = await Shipment({
     id,
@@ -38,7 +40,6 @@ exports.createShipment = async (req, res) => {
     secondary_phone_number,
     shipment_weight,
     DV,
-    postal_code,
     description,
     quantity,
     COD,
@@ -47,9 +48,14 @@ exports.createShipment = async (req, res) => {
     payment_method,
     created_at,
     current_status,
-    receipient_address: r_address,
-    shipper_address: s_address,
+
+    r_postal_code,
+    r_no_street,
+    r_district,
+    r_city,
+    shipper_details: shipper,
     driver_assigned: user,
+    pickup_date,
   });
   await shipment.save();
   res.json({ success: true, shipment });
@@ -89,7 +95,7 @@ exports.getAllShipments = async (req, res, next) => {
   }
 };
 
-exports.getCollections = async (req, res, next) => {
+exports.getCollections = async (req, res, next) => 
   const { id } = req.params;
   try {
     const datas = await Shipment.find({
