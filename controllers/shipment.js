@@ -126,17 +126,23 @@ exports.getCollections = async (req, res, next) => {
 };
 
 exports.getDelivered = async (req, res, next) => {
-  const id = req.body;
+  const { id } = req.params;
+
+  // const fullname = req.body.fullname;
   try {
-    const delivered = await Shipment.find({
-      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+    const dataD = await Shipment.find({
+      driver_assigned: id,
       current_status: "Delivered",
     }).select({ id: 1 });
-    console.log(delivered);
+
+    console.log(dataD);
+    // const total = await Shipment.find;
+    // .select({ id: 1, COD: 1 });
+    // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
     return res.status(200).json({
       success: true,
-      count: delivered.length,
-      data: delivered,
+      count: dataD.length,
+      data: dataD,
     });
   } catch (err) {
     return res.status(500).json({
@@ -147,17 +153,19 @@ exports.getDelivered = async (req, res, next) => {
 };
 
 exports.getOutForDelivery = async (req, res, next) => {
-  const id = req.body;
+  const { id } = req.params;
+  // const fullname = req.body.fullname;
   try {
-    const outfordelivery = await Shipment.find({
-      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+    const dataO = await Shipment.find({
+      driver_assigned: id,
       current_status: "OutForDelivery",
-    }).select({ id: 1 });
-    console.log(outfordelivery);
+    }).select({ id: 1, r_no_street: 1, r_city: 1 });
+
+    console.log(dataO);
     return res.status(200).json({
       success: true,
-      count: outfordelivery.length,
-      data: outfordelivery,
+      count: dataO.length,
+      data: dataO,
     });
   } catch (err) {
     return res.status(500).json({
@@ -168,17 +176,23 @@ exports.getOutForDelivery = async (req, res, next) => {
 };
 
 exports.getRescheduled = async (req, res, next) => {
-  const id = req.body;
+  const { id } = req.params;
+
+  // const fullname = req.body.fullname;
   try {
-    const rescheduled = await Shipment.find({
-      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+    const dataR = await Shipment.find({
+      driver_assigned: id,
       current_status: "Rescheduled",
     }).select({ id: 1 });
-    console.log(rescheduled);
+
+    console.log(dataR);
+    // const total = await Shipment.find;
+    // .select({ id: 1, COD: 1 });
+    // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
     return res.status(200).json({
       success: true,
-      count: rescheduled.length,
-      data: rescheduled,
+      count: dataR.length,
+      data: dataR,
     });
   } catch (err) {
     return res.status(500).json({
@@ -189,16 +203,21 @@ exports.getRescheduled = async (req, res, next) => {
 };
 
 exports.getSummary = async (req, res, next) => {
-  const id = req.body;
+  const { id } = req.params;
+
+  // const fullname = req.body.fullname;
   try {
-    const summary = await Shipment.find({
-      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
-    }).select({ id: 1 });
-    console.log(summary);
+    const dataM = await Shipment.find({
+      driver_assigned: id,
+      // current_status: "Delivered",
+    }).select({ id: 1, current_status: 1 });
+
+    console.log(dataM);
+
     return res.status(200).json({
       success: true,
-      count: summary.length,
-      data: summary,
+      count: dataM.length,
+      data: dataM,
     });
   } catch (err) {
     return res.status(500).json({
@@ -209,17 +228,23 @@ exports.getSummary = async (req, res, next) => {
 };
 
 exports.getFailToDelivery = async (req, res, next) => {
-  const id = req.body;
+  const { id } = req.params;
+
+  // const fullname = req.body.fullname;
   try {
-    const failtodelivery = await Shipment.find({
-      "driver_assigned._id": new mongoose.Types.ObjectId(id.id),
+    const dataF = await Shipment.find({
+      driver_assigned: id,
       current_status: "FailToDeliver",
     }).select({ id: 1 });
-    console.log(failtodelivery);
+
+    console.log(dataF);
+    // const total = await Shipment.find;
+    // .select({ id: 1, COD: 1 });
+    // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
     return res.status(200).json({
       success: true,
-      count: failtodelivery.length,
-      data: failtodelivery,
+      count: dataF.length,
+      data: dataF,
     });
   } catch (err) {
     return res.status(500).json({

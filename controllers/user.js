@@ -98,3 +98,16 @@ exports.fetch_users = async (req, res) => {
     });
   }
 };
+
+exports.driverName = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const usersget = await User.findOne({ email });
+    res.status(200).json(usersget);
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: "Email is not valid",
+    });
+  }
+};
