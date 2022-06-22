@@ -31,7 +31,6 @@ exports.createShipment = async (req, res) => {
 
   const user = await User.findById(driver_assigned);
   const shipper = await Shipper.findById(shipper_details);
-   
 
   const shipment = await Shipment({
     id,
@@ -96,7 +95,6 @@ exports.getAllShipments = async (req, res, next) => {
 };
 
 exports.getCollections = async (req, res, next) => {
-
   const { id } = req.params;
 
   // const fullname = req.body.fullname;
@@ -107,7 +105,7 @@ exports.getCollections = async (req, res, next) => {
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
 
-    console.log(datas);
+    // console.log(datas);
     // const total = await Shipment.find;
     // .select({ id: 1, COD: 1 });
     // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
