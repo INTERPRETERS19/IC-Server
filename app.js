@@ -8,10 +8,7 @@ const useShipment = require("./routes/shipment");
 const useShipper = require("./routes/shipper");
 const useBankDetails = require("./routes/bankdetails");
 const changepasswordRoute = require("./routes/changepassword");
-
-// app.use(bodyParser.urlencoded({ extended: false }))
-// app.use(bodyParser.json())
-
+const shipmentDetailRoute = require("./routes/shipmentdetails");
 const app = express();
 
 //  ******* import required models and routes to the app.js file *********//
@@ -24,6 +21,7 @@ app.use(changepasswordRoute);
 app.use(useShipment);
 app.use(useShipper);
 app.use(useBankDetails);
+app.use(shipmentDetailRoute);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
