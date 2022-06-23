@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const Address = require("../models/address");
 //const sharp = require("sharp");
 
 exports.createUser = async (req, res) => {
@@ -79,6 +78,10 @@ exports.userSignIn = async (req, res) => {
   const userInfo = {
     fullname: user.fullname,
     email: user.email,
+    mobile_number: user.mobile_number,
+    driving_licence_no: user.driving_licence_no,
+    vehicle_type: user.vehicle_type,
+    vehicle_reg_No: user.vehicle_reg_No,
     avatar: user.avatar ? user.avatar : "",
     id: user._id,
   };
@@ -98,3 +101,4 @@ exports.fetch_users = async (req, res) => {
     });
   }
 };
+

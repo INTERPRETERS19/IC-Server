@@ -1,4 +1,5 @@
 const express = require("express");
+const { profile } = require("../controllers/profile");
 
 const router = express.Router();
 const {
@@ -18,5 +19,6 @@ router.post("/create-user", validateUserSignUp, userVlidation, createUser);
 router.post("/sign-in", validateUserSignIn, userVlidation, userSignIn);
 router.get("/user", fetch_users);
 router.get("/allusers", getUsers);
+router.get("/profile", profile);
 
 module.exports = router;

@@ -33,10 +33,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userAddress: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "address",
-  },
+  // userAddress: {
+  //   // type: mongoose.Schema.Types.ObjectId,
+  //   type: String,
+  //   // ref: "address",
+  // },
   // avatar: {
   //   type: Buffer,
   //   contentType: String,

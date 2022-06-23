@@ -1,6 +1,4 @@
 const Shipment = require("../models/shipment");
-const Address = require("../models/address");
-const ServiceProvider = require("../models/serviceprovider");
 const User = require("../models/user");
 const Shipper = require("../models/shipper");
 
