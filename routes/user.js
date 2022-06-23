@@ -7,8 +7,6 @@ const {
   fetch_users,
   getUsers,
 } = require("../controllers/user");
-
-
 const {
   validateUserSignUp,
   userVlidation,
