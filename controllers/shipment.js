@@ -1,5 +1,5 @@
 const Shipment = require("../models/shipment");
-const Address = require("../models/address");
+//const Address = require("../models/address");
 const User = require("../models/user");
 const Shipper = require("../models/shipper");
 const mongoose = require("mongoose");
@@ -103,7 +103,10 @@ exports.getCollections = async (req, res, next) => {
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
 
-    console.log(datas);
+    // console.log(datas);
+    // const total = await Shipment.find;
+    // .select({ id: 1, COD: 1 });
+    // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
     let total = 0;
     datas.forEach((data) => (total += data.COD));
     return res.status(200).json({

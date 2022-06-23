@@ -8,7 +8,6 @@ const {
   getUsers,
 } = require("../controllers/user");
 
-
 const {
   validateUserSignUp,
   userVlidation,

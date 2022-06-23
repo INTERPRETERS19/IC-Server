@@ -3,7 +3,6 @@ const express = require("express");
 const cors = require("cors");
 require("./config/db");
 
-
 const userRouter = require("./routes/user");
 const useShipment = require("./routes/shipment");
 const useShipper = require("./routes/shipper");
