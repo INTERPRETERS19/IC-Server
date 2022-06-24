@@ -78,6 +78,10 @@ exports.userSignIn = async (req, res) => {
   const userInfo = {
     fullname: user.fullname,
     email: user.email,
+    mobile_number: user.mobile_number,
+    driving_licence_no: user.driving_licence_no,
+    vehicle_type: user.vehicle_type,
+    vehicle_reg_No: user.vehicle_reg_No,
     avatar: user.avatar ? user.avatar : "",
     id: user._id,
   };
@@ -97,6 +101,7 @@ exports.fetch_users = async (req, res) => {
     });
   }
 };
+
 
 exports.driverName = async (req, res) => {
   try {

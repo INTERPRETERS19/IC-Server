@@ -1,12 +1,10 @@
 const Shipment = require("../models/shipment.js");
 
 exports.shipmentDetails = async (req, res, next) => {
-  // const email = Profile.email;
-  const value = req.body;
-   console.log(value);
+  const id = req.body;
   try {
-    const shipmentDetails = await Shipment.findOne(req.id);
-  
+    const shipmentDetails = await Shipment.findById(id);
+
     if (!shipmentDetails) {
       return res.status(400).json({ msg: "There is no details for shipment" });
     }

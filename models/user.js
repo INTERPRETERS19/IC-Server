@@ -32,11 +32,7 @@ const userSchema = new mongoose.Schema({
   vehicle_reg_No: {
     type: String,
     required: true,
-  },
-  userAddress: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "address",
-  },
+  }
 });
 
 userSchema.pre("save", function (next) {

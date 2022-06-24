@@ -1,5 +1,4 @@
 const Shipment = require("../models/shipment");
-//const Address = require("../models/address");
 const User = require("../models/user");
 const Shipper = require("../models/shipper");
 const mongoose = require("mongoose");
@@ -96,8 +95,6 @@ exports.getAllShipments = async (req, res, next) => {
 
 exports.getCollections = async (req, res, next) => {
   const { id } = req.params;
-
-  // const fullname = req.body.fullname;
   try {
     const datas = await Shipment.find({
       driver_assigned: id,
@@ -105,10 +102,12 @@ exports.getCollections = async (req, res, next) => {
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
 
-    console.log(datas);
+
+    // console.log(datas);
     // const total = await Shipment.find;
     // .select({ id: 1, COD: 1 });
     // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
+
     let total = 0;
     datas.forEach((data) => (total += data.COD));
     return res.status(200).json({
@@ -127,18 +126,13 @@ exports.getCollections = async (req, res, next) => {
 
 exports.getDelivered = async (req, res, next) => {
   const { id } = req.params;
-
-  // const fullname = req.body.fullname;
   try {
     const dataD = await Shipment.find({
       driver_assigned: id,
       current_status: "Delivered",
-    }).select({ id: 1 });
+    });
 
     console.log(dataD);
-    // const total = await Shipment.find;
-    // .select({ id: 1, COD: 1 });
-    // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
     return res.status(200).json({
       success: true,
       count: dataD.length,
@@ -154,7 +148,7 @@ exports.getDelivered = async (req, res, next) => {
 
 exports.getOutForDelivery = async (req, res, next) => {
   const { id } = req.params;
-  // const fullname = req.body.fullname;
+
   try {
     const dataO = await Shipment.find({
       driver_assigned: id,
@@ -177,18 +171,15 @@ exports.getOutForDelivery = async (req, res, next) => {
 
 exports.getRescheduled = async (req, res, next) => {
   const { id } = req.params;
-
-  // const fullname = req.body.fullname;
   try {
     const dataR = await Shipment.find({
       driver_assigned: id,
       current_status: "Rescheduled",
-    }).select({ id: 1 });
+    });
+
 
     console.log(dataR);
-    // const total = await Shipment.find;
-    // .select({ id: 1, COD: 1 });
-    // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
+
     return res.status(200).json({
       success: true,
       count: dataR.length,
@@ -205,12 +196,10 @@ exports.getRescheduled = async (req, res, next) => {
 exports.getSummary = async (req, res, next) => {
   const { id } = req.params;
 
-  // const fullname = req.body.fullname;
   try {
     const dataM = await Shipment.find({
       driver_assigned: id,
-      // current_status: "Delivered",
-    }).select({ id: 1, current_status: 1 });
+    });
 
     console.log(dataM);
 
@@ -235,12 +224,9 @@ exports.getFailToDelivery = async (req, res, next) => {
     const dataF = await Shipment.find({
       driver_assigned: id,
       current_status: "FailToDeliver",
-    }).select({ id: 1 });
+    });
 
     console.log(dataF);
-    // const total = await Shipment.find;
-    // .select({ id: 1, COD: 1 });
-    // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
     return res.status(200).json({
       success: true,
       count: dataF.length,

@@ -16,6 +16,7 @@ const app = express();
 
 //  ******* import required models and routes to the app.js file *********//
 
+
 app.use(cors());
 app.use(express.json());
 app.use(userRouter);
