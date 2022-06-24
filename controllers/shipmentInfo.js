@@ -16,3 +16,27 @@ exports.getShipmentInfo = async (req, res, next) => {
     res.status(500).send("Server Error");
   }
 };
+
+exports.updateShipmentStatus = async (req, res, next) => {
+  try {
+    console.log(req.body.selectedValue);
+    const shipments = await Shipment.updateOne(
+      { id: req.body.shipmentId },
+      {
+        current_status:req.body.selectedValue,
+        reason:req.body.text,
+      }
+    );
+    // const shipments = await Shipment.find({ _id: req.body.id });
+    return res.status(200).json({
+      success: true,
+      message: "Updated successfully",
+      // message: shipments,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};

@@ -9,7 +9,8 @@ const useShipper = require("./routes/shipper");
 // const useServiceProvider = require("./routes/serviceprovider");
 const useBankDetails = require("./routes/bankdetails");
 const changepasswordRoute = require("./routes/changepassword");
-const getShipmentInfo = require("./routes/shipmentInfo");
+const ShipmentInfo = require("./routes/shipmentInfo");
+//const updateShipmentStatus = require("./routes/shipmentInfo");
 const shipmentDetailRoute = require("./routes/shipmentdetails");
 const app = express();
 
@@ -22,7 +23,8 @@ app.use(changepasswordRoute);
 app.use(useShipment);
 app.use(useShipper);
 app.use(useBankDetails);
-app.use(getShipmentInfo);
+app.use(ShipmentInfo);
+//app.use(updateShipmentStatus);
 app.use(shipmentDetailRoute);
 
 app.get("/", (req, res) => {
