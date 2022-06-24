@@ -155,7 +155,6 @@ exports.getOutForDelivery = async (req, res, next) => {
       current_status: "OutForDelivery",
     });
 
-
     console.log(dataO);
     return res.status(200).json({
       success: true,
