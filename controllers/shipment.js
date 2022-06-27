@@ -102,12 +102,10 @@ exports.getCollections = async (req, res, next) => {
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
 
-
     // console.log(datas);
     // const total = await Shipment.find;
     // .select({ id: 1, COD: 1 });
     // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
-
     let total = 0;
     datas.forEach((data) => (total += data.COD));
     return res.status(200).json({
@@ -176,7 +174,6 @@ exports.getRescheduled = async (req, res, next) => {
       driver_assigned: id,
       current_status: "Rescheduled",
     });
-
 
     console.log(dataR);
 
