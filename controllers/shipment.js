@@ -46,7 +46,6 @@ exports.createShipment = async (req, res) => {
     payment_method,
     created_at,
     current_status,
-
     r_postal_code,
     r_no_street,
     r_district,
