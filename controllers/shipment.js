@@ -1,5 +1,4 @@
 const Shipment = require("../models/shipment");
-//const Address = require("../models/address");
 const User = require("../models/user");
 const Shipper = require("../models/shipper");
 const mongoose = require("mongoose");
