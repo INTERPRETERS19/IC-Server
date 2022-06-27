@@ -24,6 +24,7 @@ exports.updateShipmentStatus = async (req, res, next) => {
       { id: req.body.shipmentId },
       {
         current_status:req.body.selectedValue,
+        delivered_date:req.body.deliveredDate,
         reason:req.body.text,
       }
     );
