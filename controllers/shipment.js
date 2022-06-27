@@ -46,7 +46,6 @@ exports.createShipment = async (req, res) => {
     payment_method,
     created_at,
     current_status,
-
     r_postal_code,
     r_no_street,
     r_district,
@@ -102,7 +101,6 @@ exports.getCollections = async (req, res, next) => {
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
 
-
     // console.log(datas);
     // const total = await Shipment.find;
     // .select({ id: 1, COD: 1 });
@@ -155,7 +153,6 @@ exports.getOutForDelivery = async (req, res, next) => {
       current_status: "OutForDelivery",
     });
 
-
     console.log(dataO);
     return res.status(200).json({
       success: true,
@@ -177,7 +174,6 @@ exports.getRescheduled = async (req, res, next) => {
       driver_assigned: id,
       current_status: "Rescheduled",
     });
-
 
     console.log(dataR);
 
