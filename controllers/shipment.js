@@ -165,6 +165,28 @@ exports.getOutForDelivery = async (req, res, next) => {
     });
   }
 };
+exports.getPickUp = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const dataO = await Shipment.find({
+      driver_assigned: id,
+      current_status: "PickUp",
+    }).populate("shipper_details");
+
+    console.log(dataO);
+    return res.status(200).json({
+      success: true,
+      count: dataO.length,
+      data: dataO,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
 
 exports.getRescheduled = async (req, res, next) => {
   const { id } = req.params;

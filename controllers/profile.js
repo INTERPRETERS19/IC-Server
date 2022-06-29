@@ -1,3 +1,4 @@
+const { cloudinary } = require("../cloudinary");
 const Profile = require("../models/user");
 
 exports.profile = async (req, res, next) => {
@@ -10,5 +11,37 @@ exports.profile = async (req, res, next) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
+  }
+};
+
+exports.uploadImage = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const fileStr = req.body.data;
+    const uploadResponse = await cloudinary.uploader.upload(fileStr, {
+      upload_preset: "interpreters",
+    });
+    console.log(uploadResponse.url);
+
+    const imgUrl = uploadResponse.url;
+    const userProfile = await Shipper.updateOne(
+      { id: id },
+      {
+        photo: imgUrl,
+      }
+    );
+
+    const profile = await Shipper.findById({ _id: id });
+
+    return res.status(200).json({
+      success: true,
+      message: "Image uploaded successfully",
+      data: profile,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
   }
 };
