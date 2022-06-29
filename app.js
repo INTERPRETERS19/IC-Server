@@ -13,6 +13,9 @@ const ShipmentInfo = require("./routes/shipmentInfo");
 //const updateShipmentStatus = require("./routes/shipmentInfo");
 const shipmentDetailRoute = require("./routes/shipmentdetails");
 const app = express();
+app.use(express.static('public'));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 //  ******* import required models and routes to the app.js file *********//
 

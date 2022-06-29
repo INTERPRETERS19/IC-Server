@@ -84,6 +84,9 @@ exports.userSignIn = async (req, res) => {
     vehicle_reg_No: user.vehicle_reg_No,
     avatar: user.avatar ? user.avatar : "",
     id: user._id,
+    photo: user.photo
+      ? user.photo
+      : "https://res.cloudinary.com/interpreters/image/upload/v1656161618/Rambo_pvdzno.png",
   };
 
   res.json({ success: true, user: userInfo, token });
@@ -101,7 +104,6 @@ exports.fetch_users = async (req, res) => {
     });
   }
 };
-
 
 exports.driverName = async (req, res) => {
   try {
