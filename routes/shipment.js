@@ -6,6 +6,7 @@ const {
   getAllShipments,
   getCollections,
   getUsers,
+  getDeliveryfee,
   getDelivered,
   getOutForDelivery,
   getRescheduled,
@@ -16,6 +17,7 @@ const {
 router.post("/createsh", createShipment);
 router.get("/shipments", getAllShipments);
 router.get("/collections/:id", getCollections);
+router.get("/deliveryfee/:id", getDeliveryfee);
 router.get("/users", getUsers);
 router.get("/delivered/:id", getDelivered);
 router.get("/outfordelivery/:id", getOutForDelivery);
