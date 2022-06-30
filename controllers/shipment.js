@@ -98,6 +98,7 @@ exports.getCollections = async (req, res, next) => {
     const datas = await Shipment.find({
       driver_assigned: id,
       current_status: "Delivered",
+      delivered_date: Date.now(),
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
     let total = 0;
