@@ -12,6 +12,7 @@ const {
   getRescheduled,
   getSummary,
   getFailToDelivery,
+  getPickUp,
 } = require("../controllers/shipment");
 
 router.post("/createsh", createShipment);
@@ -24,5 +25,6 @@ router.get("/outfordelivery/:id", getOutForDelivery);
 router.get("/rescheduled/:id", getRescheduled);
 router.get("/summary/:id", getSummary);
 router.get("/failtodelivery/:id", getFailToDelivery);
+router.get("/pickup/:id", getPickUp);
 
 module.exports = router;
