@@ -24,14 +24,14 @@ exports.uploadImage = async (req, res, next) => {
     console.log(uploadResponse.url);
 
     const imgUrl = uploadResponse.url;
-    const userProfile = await Shipper.updateOne(
-      { id: id },
+    const userProfile = await Profile.updateOne(
+      { _id: id },
       {
         photo: imgUrl,
       }
     );
 
-    const profile = await Shipper.findById({ _id: id });
+    const user = await Profile.findById({ _id: id });
 
     return res.status(200).json({
       success: true,
@@ -44,4 +44,4 @@ exports.uploadImage = async (req, res, next) => {
       error: "Server Error",
     });
   }
-};
+}

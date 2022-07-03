@@ -26,5 +26,6 @@ router.get("/pickup/:id", getPickUp);
 router.get("/rescheduled/:id", getRescheduled);
 router.get("/summary/:id", getSummary);
 router.get("/failtodelivery/:id", getFailToDelivery);
+router.get("/pickup/:id", getPickUp);
 
 module.exports = router;

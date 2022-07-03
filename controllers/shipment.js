@@ -2,7 +2,6 @@ const Shipment = require("../models/shipment");
 const User = require("../models/user");
 const Shipper = require("../models/shipper");
 const mongoose = require("mongoose");
-
 exports.createShipment = async (req, res) => {
   const {
     id,
@@ -284,6 +283,58 @@ exports.getDeliveryfee = async (req, res, next) => {
       count: datas.length,
       data: datas,
       total: total,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+exports.getDelivered = async (req, res, next) => {
+  const { id } = req.params;
+  var now = new Date();
+  var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  try {
+    const start = new Date(2020 - 04 - 01);
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(2021 - 04 - 01);
+    end.setHours(23, 59, 59, 999);
+    const dataD = await Shipment.find({
+      driver_assigned: id,
+      current_status: "Delivered",
+      delivered_date: {
+        $gte: startOfToday,
+      },
+    });
+    // console.log(dataD);
+    return res.status(200).json({
+      success: true,
+      count: dataD.length,
+      data: dataD,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+
+exports.getPickUp = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const dataO = await Shipment.find({
+      driver_assigned: id,
+      current_status: "PickUp",
+    }).populate("shipper_details");
+    console.log(dataO);
+    return res.status(200).json({
+      success: true,
+      count: dataO.length,
+      data: dataO,
     });
   } catch (err) {
     return res.status(500).json({

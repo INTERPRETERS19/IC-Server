@@ -12,6 +12,7 @@ exports.createUser = async (req, res) => {
     vehicle_type,
     vehicle_reg_No,
     userAddress,
+    
   } = req.body;
   const isNewUser = await User.isThisEmailInUse(email);
   if (!isNewUser)
@@ -117,3 +118,5 @@ exports.driverName = async (req, res) => {
     });
   }
 };
+
+
