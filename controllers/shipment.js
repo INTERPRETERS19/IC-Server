@@ -98,13 +98,9 @@ exports.getCollections = async (req, res, next) => {
     const datas = await Shipment.find({
       driver_assigned: id,
       current_status: "Delivered",
+      delivered_date: Date.now(),
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
-
-    // console.log(datas);
-    // const total = await Shipment.find;
-    // .select({ id: 1, COD: 1 });
-    // .aggregate([{ $group: { _id: id, total: { $sum: "$COD" } } }]);
     let total = 0;
     datas.forEach((data) => (total += data.COD));
     return res.status(200).json({
@@ -257,6 +253,28 @@ exports.getFailToDelivery = async (req, res, next) => {
       success: true,
       count: dataF.length,
       data: dataF,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      error: "Server Error",
+    });
+  }
+};
+exports.getDeliveryfee = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const datas = await Shipment.find({
+      driver_assigned: id,
+      current_status: "PickedUp",
+    }).select({ id: 1, delivery_fee: 1 });
+    let total = 0;
+    datas.forEach((data) => (total += data.delivery_fee));
+    return res.status(200).json({
+      success: true,
+      count: datas.length,
+      data: datas,
+      total: total,
     });
   } catch (err) {
     return res.status(500).json({
