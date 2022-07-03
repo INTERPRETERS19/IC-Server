@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
   vehicle_reg_No: {
     type: String,
     required: true,
+  },
+  photo: {
+    type: String,
+    required: true,
   }
 });
 
