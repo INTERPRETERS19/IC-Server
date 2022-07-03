@@ -1,5 +1,5 @@
-const Profile = require("../models/user");
 const { cloudinary } = require("../cloudinary");
+const Profile = require("../models/user");
 
 exports.profile = async (req, res, next) => {
   try {

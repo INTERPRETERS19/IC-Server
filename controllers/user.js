@@ -106,7 +106,6 @@ exports.fetch_users = async (req, res) => {
   }
 };
 
-
 exports.driverName = async (req, res) => {
   try {
     const { email } = req.body;

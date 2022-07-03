@@ -22,6 +22,7 @@ router.get("/deliveryfee/:id", getDeliveryfee);
 router.get("/users", getUsers);
 router.get("/delivered/:id", getDelivered);
 router.get("/outfordelivery/:id", getOutForDelivery);
+router.get("/pickup/:id", getPickUp);
 router.get("/rescheduled/:id", getRescheduled);
 router.get("/summary/:id", getSummary);
 router.get("/failtodelivery/:id", getFailToDelivery);
