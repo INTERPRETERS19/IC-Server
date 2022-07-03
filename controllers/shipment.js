@@ -94,11 +94,20 @@ exports.getAllShipments = async (req, res, next) => {
 
 exports.getCollections = async (req, res, next) => {
   const { id } = req.params;
+  // const date = new Date().substring(0, 10);
+  var now = new Date();
+  var startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   try {
+    const start = new Date(2020 - 04 - 01);
+    start.setHours(0, 0, 0, 0);
+    const end = new Date(2021 - 04 - 01);
+    end.setHours(23, 59, 59, 999);
     const datas = await Shipment.find({
       driver_assigned: id,
       current_status: "Delivered",
-      delivered_date: Date.now(),
+      delivered_date: {
+        $gte: startOfToday,
+      },
       COD: { $gt: 0 },
     }).select({ id: 1, COD: 1 });
     let total = 0;
